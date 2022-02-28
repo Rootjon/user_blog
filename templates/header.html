@@ -1,0 +1,70 @@
+{% load static %}
+  
+   <!-- Header -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href=""><h2>Stand Blog<em>.</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li> 
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'blog:blog' %}">Blogs</a>
+                </li>
+               
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                    Category
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                  {% for category in categories %}
+                        
+                    
+                    <li><a class="dropdown-item" href="{% url 'blog:category_blogs' category.slug %}">{{ category.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                    {{ request.user.username }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               
+                    <li><a class="dropdown-item" href="{% url 'user_profile:profile' %}">My Profile </a></li>
+                    <li><a class="dropdown-item" href="{% url 'user_profile:user_notification' %}">
+                      {% if unseen > 0 %}
+                      Notification ({{ unseen }})
+                      {% else %}
+                      Notification 
+                      {% endif %}
+                    </a></li>
+                    <li><a class="dropdown-item" href="{% url 'user_profile:logout' %}">Logout </a></li>
+
+                  </ul>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'user_profile:login' %}">login</a>
+                </li>
+                {% endif %}
+                <form class="form-inline d-flex flex-nowrap my-2 ml-auto search-form" action="{% url 'blog:search_blogs' %}" method="GET">
+                  <input class="form-control px-5" name="search" type="text" placeholder="Search Blogs">
+                  <button class="btn btn-primary ml-1">Search</button>
+                </form>
+
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Blogs Search  {% endblock title %}
+
+{% block maincontent %}
+
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+          <div class="row py-3">
+              <div class="col-md-8">
+                  <h4 class="text-center"> Your Search Result : {{ search_key }} ({{ blogs.count }}) </h4>
+              </div>
+          </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+
+                {% for blog in blogs %}
+    
+
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{ blog.banner.url }}" alt="">
+                    </div>
+                    <div class="down-content">
+                      <span>{{ blog.category }}</span>
+                      <a href="{% url 'blog:blog_details' blog.slug %}"><h4>{{ blog.title }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ blog.user.username }}</a></li>
+                        <li><a href="#">{{ blog.created_date | date }}</a></li>
+                        <li><a href="#">{{ blog.blog_comment.all.count }} Comments</a></li>
+                      </ul>
+                     <p>{{ blog.description | truncatewords:20 | safe }}</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              {% if blog.tags.all.count > 0 %}
+                              
+                              {% for tag in blog.tags.all %}
+                           
+                              <li><a href="#">{{ tag.title }}</a></li>
+                              {% endfor %}
+                              {% else  %}
+                                None
+                              {% endif %}
+                            </ul>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {% endfor %}
+               
+
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <div class="row">
+                
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts sidebar-item search">
+                    <div class="sidebar-heading">
+                      <h2>Recent Posts</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+
+                        {% for blog in blogs|slice:"3" %}
+                        <li><a href="{% url 'blog:blog_details' blog.slug %}">
+                          <h5>{{ blog.title }}</h5>
+                          <span>{{ blog.created_date | date }}</span>
+                        </a></li>
+                       {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                      <h2>Categories</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        {% for category in categories %}
+                            
+                        
+                        <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item tags">
+                    <div class="sidebar-heading">
+                      <h2>Tag Clouds</h2>
+                    </div>
+                    <div class="content">
+            
+                      <ul>
+                        {% for tag in tags|slice:"6" %}
+                            
+                        
+                        <li><a href="{{ tag.get_tags_absolute_url }}">{{ tag.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% endblock maincontent %}
+    

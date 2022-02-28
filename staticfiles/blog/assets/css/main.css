@@ -1,0 +1,55 @@
+.empty-heart{
+    color: #cdcdcd !important ;
+}
+.blog-posts .submit-comment textarea{
+    text-transform: none;
+}
+.reply-button {
+	display: inline-block;
+	background-color: #f48840;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 12px 20px;
+	text-transform: uppercase;
+	transition: all .3s;
+	border: none;
+	outline: none;
+}
+.fa-heart {
+	color: red ;
+
+}
+.btn btn-primary {
+	display: inline-block;
+	background-color: #f48840;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 12px 20px;
+	text-transform: uppercase;
+	transition: all .3s;
+	border: none;
+	outline: none;
+}
+.sidebar-heading h2 {
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: 0.5px;
+	color: #20232e;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 15px;
+	margin-bottom: 25px;
+	margin-top: 25px;
+}
+
+.errors{
+	color: red;
+	padding-bottom: 10px;
+}
+.profile-picture{
+	max-width: 100%;
+	width: 180px;
+	height: 180px;
+}

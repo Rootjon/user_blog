@@ -1,0 +1,89 @@
+<textarea class="form-control" name="description" id="" cols="30" rows="10"></textarea>
+
+
+
+<p>{{ blog.description | truncatewords:20 }}</p>
+
+
+followers=account.followers.all(
+    followed_by__id = request.user.id
+)
+
+{% url 'user_profile:user_information' notification.content_object.followed_by.username %}
+
+{% else %}
+                            <a class="text-decoration-none text-dark" href="{% url 'user_profile:user_information' notification.content_object.followed_byusername %}">
+                                <p>{{notification.text}}</p>
+                                <p>{{notification.created_date|timesince}} ago</p>
+                            </a>
+
+
+
+
+
+
+
+                  <!-- Pagination -->
+
+                
+                  <nav  aria-label="Page navigation">
+                    <ul class="pagination mb-0">
+                      
+                      {% if page_obj.has_previous %}
+                      <li class="page-item mr-auto">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="d-none d-sm-inline-block ml-1">Prev</span>
+                        </a>
+                      </li>
+                      
+                      {% else %}
+                      <li class="page-item mr-auto">
+                        <a class="page-link" href="" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="d-none d-sm-inline-block ml-1">Prev</span>
+                        </a>
+                      </li>
+                      
+                      {% endif %}
+                      
+                      
+                      {% load l10n %}           
+                      {% for post in page_obj.paginator.page_range %}
+                      
+                      {% if page_obj.number == post  %}
+                      <li class="page-item active">
+                        <a class="page-link" href="?page={{ post }}">{{ post | localize }}</a>
+                      </li>
+                      {% else %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ post }}">{{ post }}</a>
+                      </li>
+        
+                      {% endif %}
+                      {% endfor %}
+                      
+                      
+                      {% if page_obj.has_next %}
+                      <li class="page-item ml-auto">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                          <span class="d-none d-sm-inline-block mr-1">Next</span>
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      {% else %}
+                      <li class="page-item ml-auto">
+                        <a class="page-link" href="" aria-label="Next">
+                          <span class="d-none d-sm-inline-block mr-1">Next</span>
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      
+                      {% endif %}
+                    
+                    
+                    </ul>
+                  </nav>
+                
+                  <!-- End Pagination -->
+                

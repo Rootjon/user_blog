@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} My Blogs {% endblock title %}
+
+{% block maincontent %}
+
+
+
+<section class="my-blogs">
+    <div class="container-fluid">
+        <div class="row py-5">
+          {% if messages %}	
+          {% for massage in messages %}
+        <div class="alert alert-{{massage.tags }} alert-dismissible fade show" role="alert">
+              <strong>{{ massage }} </strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+            {% for blog in page_obj %}          
+            <div class="col-md-4 my-2">
+                <div class="card">
+                    <img  src="{{ blog.banner.url }}" class="card-img-top img-fluid" style="width: 100%; height: 320px;" alt="Image">
+                    <div class="card-body">
+                      <p class="card-text d-flex flex-row">
+                       <a href="{% url 'blog:blog_details' blog.slug %}"> {{ blog.title }}</a>
+                        <a class="px-2 ml-auto" href="{% url 'blog:update_blog' blog.slug %}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="px-2" href="?delete={{ blog.pk }}">
+                            <i class="fa fa-trash text-danger"></i>
+                        </a>
+                      </p>
+                    </div>
+                  </div>              
+            </div>
+        {% endfor %}
+            
+        </div>
+        
+
+<!-- Pagination -->   
+<div class="row py-2">   
+    <div class="clo-md-8 justify-content-center">    
+<nav  aria-label="Page navigation">
+    <ul class="pagination mb-0">
+      
+      {% if page_obj.has_previous %}
+      <li class="page-item mr-auto">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="d-none d-sm-inline-block ml-1">Prev</span>
+        </a>
+      </li>
+      
+      {% else %}
+      <li class="page-item mr-auto">
+        <a class="page-link" href="" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="d-none d-sm-inline-block ml-1">Prev</span>
+        </a>
+      </li>
+      
+      {% endif %}     
+      {% load l10n %}           
+      {% for post in page_obj.paginator.page_range %}
+      
+      {% if page_obj.number == post  %}
+      <li class="page-item active">
+        <a class="page-link" href="?page={{ post }}">{{ post | localize }}</a>
+      </li>
+      {% else %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ post }}">{{ post }}</a>
+      </li>
+
+      {% endif %}
+      {% endfor %}    
+      {% if page_obj.has_next %}
+      <li class="page-item ml-auto">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span class="d-none d-sm-inline-block mr-1">Next</span>
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item ml-auto">
+        <a class="page-link" href="" aria-label="Next">
+          <span class="d-none d-sm-inline-block mr-1">Next</span>
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      
+      {% endif %}    
+    </ul>
+  </nav>
+</div>
+</div>   
+  <!-- End Pagination -->
+        
+    </div>
+</section>
+
+
+
+
+
+
+
+
+{% endblock maincontent %}

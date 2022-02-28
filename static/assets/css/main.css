@@ -1,0 +1,38 @@
+.empty-heart{
+    color: #cdcdcd !important ;
+}
+.blog-posts .submit-comment textarea{
+    text-transform: none;
+}
+.reply-button {
+	display: inline-block;
+	background-color: #f48840;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 12px 20px;
+	text-transform: uppercase;
+	transition: all .3s;
+	border: none;
+	outline: none;
+}
+.fa-heart {
+	color: red ;
+
+}
+.btn btn-primary {
+	display: inline-block;
+	background-color: #f48840;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 12px 20px;
+	text-transform: uppercase;
+	transition: all .3s;
+	border: none;
+	outline: none;
+}
+.errorslis{
+	color: red;
+	padding-bottom: 10px;
+}

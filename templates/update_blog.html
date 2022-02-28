@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Blog {% endblock title %}
+
+{% block maincontent %}
+
+<section class="my-blogs">
+    <div class="container">
+        <div class="row py-5 justify-content-center">
+            <div class="col-md-8">
+                {% if messages %}	
+                {% for massage in messages %}
+              <div class="alert alert-{{massage.tags }} alert-dismissible fade show" role="alert">
+                    <strong>{{ massage }} </strong> 
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    <div class="form-group">
+                        <label  for="title"> Blog Title</label>
+                        <input class="form-control" type="text" name="title" value="{{ form.instance.title }}">
+                        <p class="py-1 text-danger errors ">{{ form.instance.title.errors }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="title"> Blog Category</label>
+                        
+                        <select class="form-control" name="category" id="category_id">
+                            {% for category in categories %}
+                            <option value="{{ category.id }}"{% if form.instance.category.pk == category.pk %} selected {% endif %}>{{ category.title }}</option>
+                            {% endfor %}
+                            <p class="py-1 text-danger errors " >{{ form.instance.category.errors }}</p>
+                        </select> 
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Description</label>
+                        {{ form.description | safe }}
+                        <p class="py-1 text-danger errors ">{{ form.instance.description.errors }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label  for="title"> Blog Banner</label>
+                        <input class="form-control" value="{{ form.instance.banner.url }}" type="file" name="banner">
+                        <p class="py-1 text-danger errors ">{{ form.instance.banner.errors }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Tags</label>
+                        <textarea class="form-control" name="tags" id=""  cols="30" rows="10" placeholder="Enter comma separeted values">{{ form.instance.tags }}</textarea>
+                        <p class="py-1 text-danger errors ">{{ form.instance.tags.errors }}</p>
+                    </div>
+                    <div class="form-group my-2">
+                        <button type="submit" class="btn btn-primary btn-block">Update </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+{% endblock maincontent %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} My Profile  {% endblock title %}
+
+{% block maincontent %}
+
+<section class="profile">
+   <div class="container-fluid">
+       <div class="row py-5">
+           <div class="col-md-4">
+               <div class="text-center">
+                   <img class="rounded rounded-circle profile-picture" src="{{ request.user.get_profile_piture }}" alt="images">
+                    <ul class="text-center py-3">
+                        <li class="py-2">
+                            <span> Posts: <strong>{{ account.user_blogs.count }}</strong></span>
+                        </li>
+                        <li class="py-2">
+                            <span> Follwers: <strong>{{ account.user_followers.count }}</strong></span>
+                        </li>
+                        <li class="py-2">
+                            <span> Following: <strong>{{ account.user_follows.count }}</strong></span>
+                        </li>
+                        <li class="py-2">
+                            {% if following %}
+                            <a class=" btn btn-primary text-decoration-none" href="{% url 'user_profile:follow_or_unfollow_user'  account.id %}"> Unfollow</a>
+                            {% if muted %}
+                            <a class=" btn btn-primary text-decoration-none" href="{% url 'user_profile:mute_or_unmute_user'  account.id %}"> Unmute</a>   
+                            {% else %}
+                            <a class=" btn btn-danger text-decoration-none" href="{% url 'user_profile:mute_or_unmute_user'  account.id %}"> Mute</a>
+                            {% endif %} 
+                            {% else %}
+                            <a class=" btn btn-primary text-decoration-none" href="{% url 'user_profile:follow_or_unfollow_user'  account.id %}"> Follow</a>
+                            {% endif %}
+                            
+                        </li>
+                   
+                    </ul>
+
+               </div>
+        
+              
+           </div>
+           
+           <div class="col-md-8 ">
+           
+                <h4 class="  text-monospace">{{ account.username }}`s Blogs </h4>     
+        
+               
+            <ul class="list-group list-group-flush">
+                {% for blog in account.user_blogs.all %}
+                    
+                
+                <li class="list-group-item py-3 fo">              
+                   <a href="{% url 'blog:blog_details' blog.slug %}">
+                   <p >{{ blog.title}} </p>
+                   <p >{{ blog.created_date | date }}</p>
+                   </a>
+               </li>
+               {% endfor %}
+            </ul>
+        </div>
+           
+
+       </div>
+   </div>
+</section>
+
+
+
+
+
+
+{% endblock maincontent %}

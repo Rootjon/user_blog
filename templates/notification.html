@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Notifications  {% endblock title %}
+
+{% block maincontent %}
+
+<section class="notification">
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            {% if notifications %}
+               <div class="col-md-8">
+                   <ul class="list-group list-group-flush">
+                       {% for notification in notifications %}
+                       {% if notification.content_object %}
+                       <li class="list-group-item">
+                        {% if notification.notification_type == 'Blog' or  notification.notification_type == 'Like'%}
+                           <a href="{% url 'blog:blog_details' notification.content_object.slug %}"> 
+                               <p>{{ notification.text }}</p>
+                               <p>{{ notification.created_date | timesince }} ago</p>
+                            </a>
+                            {% else %}
+                            <a class="text-decoration-none text-dark" href="{% url 'user_profile:user_information' notification.content_object.followed_by.username %}">
+                                <p>{{notification.text}}</p>
+                                <p>{{notification.created_date|timesince}} ago</p>
+                            </a>
+                        {% endif %}
+                       </li>
+                       {% endif %} 
+                       {% endfor %}
+
+                   </ul>
+               </div> 
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock maincontent %}
