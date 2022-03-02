@@ -43,6 +43,7 @@ h1,h2,h3,h4,h5,h6 {
 	text-transform: uppercase;
 	transition: all .3s;
 }
+
 .reply-button textarea {
 	display: inline-block;
 	background-color: #f48840;
@@ -55,7 +56,6 @@ h1,h2,h3,h4,h5,h6 {
 	border: none;
 	outline: none;
 }
-
 .main-button a:hover {
 	background-color: #fb9857;
 }
@@ -173,7 +173,7 @@ h1,h2,h3,h4,h5,h6 {
 
 /* Header Style */
 header {
-	position: absolute;
+	position: static;
 	z-index: 99999;
 	width: 100%;
 	height: 100px;
@@ -184,13 +184,13 @@ header {
     transition: all 0.3s ease-in-out 0s;
 }
 header .navbar {
-	padding: 25px 0px;
+	padding: 15px 0px;
 }
 .background-header .navbar {
 	padding: 17px 0px;
 }
 .background-header {
-	top: 0;
+	top: 10;
 	height: 80px;
 	position: fixed;
 	box-shadow: 0px 1px 10px rgba(0,0,0,0.1);
@@ -573,7 +573,7 @@ ul.page-numbers li a:hover {
 	color: #20232e;
 	border-bottom: 1px solid #eee;
 	padding-bottom: 15px;
-	margin-bottom: 25px;
+
 }
 
 .blog-posts .comments {
@@ -659,6 +659,7 @@ ul.page-numbers li a:hover {
 	max-width: 100%;
 	min-width: 160px;
 }
+
 .submit-reply textarea {
 	width: 100%;
 	height: 46px;
@@ -698,6 +699,7 @@ ul.page-numbers li a:hover {
 	background-color: #fb9857;
 }
 
+
 /* Sidebar */
 
 .sidebar {
@@ -720,15 +722,18 @@ ul.page-numbers li a:hover {
 	color: #20232e;
 	border-bottom: 1px solid #eee;
 	padding-bottom: 15px;
-	margin-bottom: 25px;
-}
 
+}
+.errors{
+	color: red;
+	padding-bottom: 10px;
+}
 .sidebar .search input {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform:none;
+	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -892,7 +897,7 @@ footer p a:hover {
 	color: #20232e;
 	border-bottom: 1px solid #eee;
 	padding-bottom: 15px;
-	margin-bottom: 25px;
+
 }
 
 .contact-us .contact-form input {
@@ -905,7 +910,7 @@ footer p a:hover {
 	color: #7a7a7a;
 	outline: none;
 	padding: 0px 15px;
-	margin-bottom: 5px;
+	margin-bottom:5px;
 }
 
 .contact-us .contact-form textarea {
@@ -1057,6 +1062,11 @@ footer p a:hover {
 	}
 	.navbar:after {
 		display: none;
+	}
+	.profile-picture{
+		max-width: 100%;
+		width: 180px;
+		height: 180px;
 	}
 	#navbarResponsive {
 	    z-index: 99999;

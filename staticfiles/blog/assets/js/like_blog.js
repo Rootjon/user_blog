@@ -7,7 +7,7 @@ likeIcon.onclick = () => {
     fetch(url,{
         method:'GET',
         headers:{
-            'content-type':'applicatin/json'
+            'content-type':'application/json'
         }
 
     })
