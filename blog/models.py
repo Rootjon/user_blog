@@ -1,6 +1,3 @@
-
-from ast import arg
-from turtle import update
 from django.db import models
 from django.urls import reverse
 from user_profile.models import User
