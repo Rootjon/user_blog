@@ -1,8 +1,4 @@
-from genericpath import exists
-from turtle import title
-from urllib.request import Request
 from django.utils.text import slugify
-from unicodedata import category
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
